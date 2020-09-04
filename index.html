@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+         <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+        <script src="https://kit.fontawesome.com/8fb5d94d3c.js"></script>
+    </head>
+    <body>
+
+        <nav class="navBarBlock">
+            <h4 class="titreNavBar">V.Location</h4>
+        </nav>
+          <header>
+            <div id="slider1" class="slider_box">
+              <div class="image_slider">
+                <img alt="velo" name="slide">
+              </div>
+              <div class="arrow_left_slider arriere">
+                  <div class="arrow-position">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                  </div>
+                </div>
+                <div class="arrow_right_slider avant">
+                  <div class="arrow-position">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                  </div>
+                </div>
+                <div class="circle arriere pause" >
+                    <div class="circle-position">
+                      <i class="fas fas fa-play fa-2x"></i>
+                    </div>
+                  </div>
+            </div>
+
+          </header>
+          <section class="container">
+            <div class="row">
+              <div class="col-12 col-lg-8">
+                <div class="block">
+                  <div class="blockTitre">
+                    <h5>Carte des stations</h5>
+                  </div>
+                  <div class="blockMaps">
+                    <div id="mapid"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="block">
+                  <div class="blockTitre">
+                    <h5>Réservation + Info Station</h5>
+                  </div>
+                  <div class="blockinfo">
+                      <h6 style="color: brown; margin-bottom: 20px; text-transform: uppercase;" id="nullstation">Vous devez sélectionner une station pour continuer !</h6>
+                      <h6 id="h3name"></h6>
+                      <p id="padresse"></p>
+                      <p id="pvelo"></p>
+                      <p id="pplace"></p>
+                  </div>
+                  <div class="blockform" id="reservation_1">
+                    <form id="form_contact">
+                      <input type="text" class="form-control" placeholder="Nom" id="nom" required>
+                      <input type="text" class="form-control" placeholder="Prénom" id="prenom" required>
+              
+                      <button type="submit" class="btn btn-info" id="btnClick">Suivant</button>
+                    </form>
+                  </div>
+                  <div class="blockform" id="reservation_2">
+                      <canvas id="canvas"></canvas>
+                      <div>
+                        <button type="button" class="btn btn-info" id="btnConfirm">Confirmer</button>
+                        <button type="button" class="btn btn-primary" id="annuler">Annuler</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" id="reserv">
+              <div class="col-12 col-lg-8 col-xl-8">
+                <div class="block">
+                  <div class="blockTitre">
+                    <h5>Votre Réservation</h5>
+                  </div>
+                  <div class="blockinfo">
+                    <h5 id="station"></h5>
+                    <p id="timerp"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="container">
+              <div class="row" id="confirmationBlock">
+                  <div class="col-12 col-lg-8 col-xl-8">
+                    <div class="block">
+                      <div class="blockTitre">
+                        <h5>Confirmation</h5>
+                      </div>
+                      <div class="blockinfo">
+                        <h4>Voulez vraiment modifier votre réservation ?</h4>
+                        <p>Celle ci sera annuler !</p>
+                        <button class="btn btn-success" id="yes">OUI</button>
+                        <button class="btn btn-danger" id="no">NON</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                  <div class="col-12 col-lg-8 col-xl-8">
+                      <div class="block">
+                        <div class="blockTitre">
+                          <h5>Station Status Information</h5>
+                        </div>
+                        <div class="blockinfo">
+                          <i><img src="assets/icon/open.png" alt="Station ouvert" width="30px" height="30px"> Station Ouvert</i>
+                          <i><img src="assets/icon/closed.png" alt="Station ouvert" width="30px" height="30px"> Station Fermer</i>
+                          <i><img src="assets/icon/stockend.png" alt="Station ouvert" width="30px" height="30px"> Vélo indisponible</i>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+          </section>
+
+          <div id="slider2" class="slider_box">
+            <div class="image_slider">
+              <img alt="velo" name="slide">
+            </div>
+            <div class="arrow_left_slider arriere">
+                <div class="arrow-position">
+                  <i class="fas fa-angle-left fa-2x"></i>
+                </div>
+              </div>
+              <div class="arrow_right_slider avant">
+                <div class="arrow-position">
+                  <i class="fas fa-angle-right fa-2x"></i>
+                </div>
+              </div>
+              <div class="circle arriere pause" >
+                  <div class="circle-position">
+                    <i class="fas fas fa-play fa-2x"></i>
+                  </div>
+                </div>
+          </div>
+          <footer class="footer">
+            <p>Projet formation OpenClassRooms</p>
+          </footer>
+
+      <!-- JS -->
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="assets/js/ajax.js"></script>
+      <script src="assets/js/reservation.js"></script>
+      <script src="assets/js/map.js"></script>
+      <script src="assets/js/canvas.js"></script>
+      <script src="assets/js/diapo.js"></script>
+      <script src="assets/js/controler.js"></script>
+      <!-------->
+    </body>
+</html>
